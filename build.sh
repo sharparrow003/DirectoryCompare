@@ -7,7 +7,7 @@ case $1 in
 		mkdir -p build/
 		cd build
 
-		cmake ..
+		cmake -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_C_COMPILER=gcc-10 ..
 
 		cmake --build .
 	;;
@@ -20,7 +20,7 @@ case $1 in
 	run)
 		echo "Running code ..."
 		cd build/
-		./DirComparator
+		./DirComparator $2 $3
 	;;
 
 	*)
