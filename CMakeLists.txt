@@ -1,34 +1,29 @@
 cmake_minimum_required(VERSION 3.10)
-
-# Project name and version
 project(DirComparator VERSION 1.0)
 
-# Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add executable target
-add_executable(DirComparator
-    main.cpp
-    DirectoryComparator.cpp
-    HashingUtility.cpp
+# Define the library
+add_library(DirComparatorLib SHARED
+    src/DirectoryComparator.cpp
 )
 
-# Include directories
-target_include_directories(DirComparator PRIVATE
-    ${CMAKE_SOURCE_DIR}
+target_include_directories(DirComparatorLib PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# Define the executable
+add_executable(DirComparator
+    src/main.cpp
 )
 
 # Find and link any necessary libraries (for example, OpenSSL for hashing)
 find_package(OpenSSL REQUIRED)
 target_link_libraries(DirComparator PRIVATE OpenSSL::SSL)
 
-# Optionally, add custom compiler flags
-if(MSVC)
-    target_compile_options(DirComparator PRIVATE /W4 /WX)
-else()
-    target_compile_options(DirComparator PRIVATE -Wall -Wextra -Wpedantic -Werror)
-endif()
+target_link_libraries(DirComparator PRIVATE DirComparatorLib)
 
-# Install the executable (optional)
-install(TARGETS DirComparator DESTINATION bin)
+# Install rules for making the project consumable
+install(TARGETS DirComparatorLib DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)
