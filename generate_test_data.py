@@ -83,5 +83,5 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
     print("Expected result files created (common.txt, a_only.txt, b_only.txt).")
 
 if __name__ == "__main__":
-    n = 10  # Number of files, adjust for testing
+    n = 10000  # Number of files, adjust for testing
     generate_files(n)
