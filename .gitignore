@@ -33,3 +33,6 @@
 
 # Build Dir
 build/
+
+# Test Data Dir
+test_data/

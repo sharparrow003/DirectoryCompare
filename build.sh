@@ -1,5 +1,11 @@
 #! /bin/bash
 
+currentDir=$(pwd)
+a_dir=$currentDir/$2
+b_dir=$currentDir/$3
+
+echo $a_dir
+echo $b_dir
 
 case $1 in
 	build)
@@ -13,14 +19,15 @@ case $1 in
 	;;
 
 	clean)
-		echo "Cleaning code ..."
+		echo "Cleaning code and test data ..."
 		rm -rf build/*
+		rm -rf test_data/*
 	;;
 
 	run)
 		echo "Running code ..."
 		cd build/
-		./DirComparator $2 $3
+		./DirComparator $a_dir $b_dir
 	;;
 
 	*)

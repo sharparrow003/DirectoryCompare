@@ -13,7 +13,7 @@ namespace HashingUtility {
     string hashFile(const string& filePath) {
         ifstream file(filePath, ios::binary);
         if (!file) {
-            throw std::runtime_error("Failed to open file: " + filePath);
+            throw runtime_error("Failed to open file: " + filePath);
         }
 
         SHA256_CTX sha256;
