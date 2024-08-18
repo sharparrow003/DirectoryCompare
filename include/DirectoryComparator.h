@@ -18,7 +18,7 @@ public:
     void compare();
 
     // Function to write results to files
-    // void writeResults(const std::string& commonFile, const std::string& aOnlyFile, const std::string& bOnlyFile);
+    void writeResults();
 
     // Destructor
     ~DirectoryComparator();

@@ -22,8 +22,11 @@ int main(int argc, char *argv[])
         DirectoryComparator dc(dir_a, dir_b);
 
         // Compare directories
+        dc.compare();
 
         // Write output files
+        dc.writeResults();
+
     } catch (exception& e) {
         cerr << "Error: " << e.what() << endl;
         return 2;

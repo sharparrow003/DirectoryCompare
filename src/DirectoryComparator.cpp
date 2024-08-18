@@ -2,6 +2,10 @@
 #include "HashingUtility.h"
 #include <iostream>
 
+#define COMMON_FILENAME "common.txt"
+#define A_ONLY_FILENAME "a_only.txt"
+#define B_ONLY_FILENAME "b_only.txt"
+
 // Constructor
 DirectoryComparator::DirectoryComparator(const string& dir_a, const string& dir_b)
 : dirA(dir_a), dirB(dir_b) {
@@ -44,5 +48,22 @@ void DirectoryComparator::traverseDirectory(const string& dir, unordered_map<str
             string hash = hashFile(entry.path().string());
             fileMap[hash].push_back(entry.path().string());
         }
+    }
+}
+
+void DirectoryComparator::writeResults() {
+    ofstream commonStream(COMMON_FILENAME);
+    for (const auto& path : commonFiles) {
+        commonStream << path << endl;
+    }
+
+    ofstream aOnlyStream(A_ONLY_FILENAME);
+    for (const auto& path : aOnlyFiles) {
+        aOnlyStream << path << endl;
+    }
+
+    ofstream bOnlyStream(B_ONLY_FILENAME);
+    for (const auto& path : bOnlyFiles) {
+        bOnlyStream << path << endl;
     }
 }
