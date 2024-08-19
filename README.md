@@ -1,7 +1,11 @@
 ## Requirements
+
 **Compiler**: GCC 9.3+, Clang 10.0+, or MSVC 2019+
+
 **CMake**: 3.10 or later
+
 **OpenSSL**: Required for SHA-256 hashing
+
 
 Originally developed on Linux Ubuntu 16.04
 
@@ -19,7 +23,7 @@ Originally developed on Linux Ubuntu 16.04
    ./build.sh build
    ```
    
-  Build files generated and added to directory build.
+     Build files generated and added to directory build.
 ### Usage
 **Run executable using helper script build.sh**
    
