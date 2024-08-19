@@ -1,6 +1,7 @@
 #include "DirectoryComparator.h"
 #include "HashingUtility.h"
 #include <iostream>
+#include <algorithm>
 
 #define COMMON_FILENAME "common.txt"
 #define A_ONLY_FILENAME "a_only.txt"
@@ -65,6 +66,11 @@ void DirectoryComparator::writeResults() {
     cout << __func__<< "Number of common files: " << commonFiles.size() << endl;
     cout << __func__<< "Number of files unique to dirA: " << aOnlyFiles.size() << endl;
     cout << __func__<< "Number of files unique to dirB: " << bOnlyFiles.size() << endl;
+
+    // Sort the vectors
+    sort(commonFiles.begin(), commonFiles.end());
+    sort(aOnlyFiles.begin(), aOnlyFiles.end());
+    sort(bOnlyFiles.begin(), bOnlyFiles.end());
 
     ofstream commonStream(COMMON_FILENAME);
     for (const auto& path : commonFiles) {

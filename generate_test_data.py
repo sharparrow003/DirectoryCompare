@@ -68,7 +68,7 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
         if is_common:
             write_file(dir_a, filename, content_a)
             write_file(dir_b, filename, content_b)
-            common_files.append(filename)
+            common_files.append(os.path.join(dir_a, subdir, filename))
         
         # Unique to dir_a and dir_b
         else:
@@ -95,9 +95,9 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
 
     print(f"Generated {n} files in each directory.")
     print(f"Common files: {len(common_files)}")
-    print(f"Unique to dir_a: {len(a_only_files)}")
-    print(f"Unique to dir_b: {len(b_only_files)}")
-    print("Expected result files created (common.txt, a_only.txt, b_only.txt).")
+    print(f"Unique to test_data/files_a/: {len(a_only_files)}")
+    print(f"Unique to test_data/files_a/: {len(b_only_files)}")
+    print("Sample output files created: expected_common.txt, expected_a_only.txt, expected_b_only.txt")
 
 if __name__ == "__main__":
     n = 100000  # Number of files, adjust for testing
