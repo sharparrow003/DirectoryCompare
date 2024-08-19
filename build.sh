@@ -4,9 +4,6 @@ currentDir=$(pwd)
 a_dir=$currentDir/$2
 b_dir=$currentDir/$3
 
-echo $a_dir
-echo $b_dir
-
 case $1 in
 	build)
 		echo "Building code ..."
@@ -17,21 +14,39 @@ case $1 in
 
 		cmake --build .
 	;;
-
-	clean)
-		echo "Cleaning code and test data ..."
-		rm -rf build/*
-		rm -rf test_data/*
-	;;
-
 	run)
 		echo "Running code ..."
 		cd build/
 		./DirComparator $a_dir $b_dir
 	;;
+	create_test_data)
+		echo "Creating sample test data ..."
+		python3 generate_test_data.py
+	;;
+
+	clean)
+		echo "Cleaning build dir ..."
+		rm -rf build/
+	;;
+	clean_test_data)
+		echo "Cleaning test data ..."
+		rm -rf test_data/
+	;;
+	clean_all)
+		create_test_data
+		clean_test_data
+	;;
 
 	*)
-		echo "Incorrect usage"
-		# TODO add user friendly message
+		echo ""
+		echo "Incorrect usage. Please use ./build.sh <action> <args if applicable>"
+		echo ""
+		echo "Supported actions:"
+		echo "1. build: Builds code"
+		echo "2. run: Runs built code. Pass dirA and dirB as args. Example: ./build.sh run test_data/files_a/ test_data/files_b/"
+		echo "3. create_test_data: Creates test data"
+		echo "4. clean: Cleans build dir"
+		echo "5. clean_test_data: Cleans test data"
+		echo "6. clean_all: Cleans both build dir and test data"
 	;;
 esac

@@ -9,8 +9,8 @@
 // Constructor
 DirectoryComparator::DirectoryComparator(const string& dir_a, const string& dir_b)
 : dirA(dir_a), dirB(dir_b) {
-	cout << __func__<< " dirA --> " << dirA << endl;
-	cout << __func__<< " dirB --> " << dirB << endl;
+	cout << __func__<< " dirA: " << dirA << endl;
+	cout << __func__<< " dirB: " << dirB << endl;
 	cout << __func__<< " DirectoryComparator initialized!" << endl;
 }
 
@@ -43,15 +43,29 @@ string DirectoryComparator::hashFile(const string& filePath) {
 }
 
 void DirectoryComparator::traverseDirectory(const string& dir, unordered_map<string, vector<string>>& fileMap) {
+    cout << __func__<< " Traversing " << dir <<" ... " << endl;
+    string filePath;
     for (const auto& entry : filesystem::recursive_directory_iterator(dir)) {
-        if (entry.is_regular_file()) {
-            string hash = hashFile(entry.path().string());
-            fileMap[hash].push_back(entry.path().string());
+        filePath = entry.is_symlink() ? filesystem::read_symlink(entry.path().string()).string() : entry.path().string();
+        if (filesystem::is_regular_file(filePath)) {
+            try {
+                string hash = hashFile(filePath);
+                fileMap[hash].push_back(filePath);
+            } catch (const filesystem::filesystem_error &e) {
+                cerr << "Filesystem error for file " << entry.path() << ": " << e.what() << endl;
+            } catch (const exception &e) {
+                cerr << "General error for file " << entry.path() << ": " << e.what() << endl;
+            }
         }
     }
+    cout << __func__<< " Finished Traversing " << dir << endl;
 }
 
 void DirectoryComparator::writeResults() {
+    cout << __func__<< "Number of common files: " << commonFiles.size() << endl;
+    cout << __func__<< "Number of files unique to dirA: " << aOnlyFiles.size() << endl;
+    cout << __func__<< "Number of files unique to dirB: " << bOnlyFiles.size() << endl;
+
     ofstream commonStream(COMMON_FILENAME);
     for (const auto& path : commonFiles) {
         commonStream << path << endl;
@@ -66,4 +80,6 @@ void DirectoryComparator::writeResults() {
     for (const auto& path : bOnlyFiles) {
         bOnlyStream << path << endl;
     }
+
+    cout << __func__<< "Expected result files created (common.txt, a_only.txt, b_only.txt)." << endl;
 }

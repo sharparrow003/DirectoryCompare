@@ -14,7 +14,17 @@ b_only_file = 'test_data/expected_b_only.txt'
 os.makedirs(dir_a, exist_ok=True)
 os.makedirs(dir_b, exist_ok=True)
 
+# Subdirectory definitions (can be expanded or randomized)
+subdirs = [
+    '',
+    'subdir1',
+    'subdir2',
+    'subdir1/nested_subdir1',
+    'subdir2/nested_subdir2'
+]
+
 def write_file(directory, filename, content):
+    os.makedirs(directory, exist_ok=True)
     """Writes a file with the specified content."""
     with open(os.path.join(directory, filename), 'w') as f:
         f.write(content)
@@ -39,6 +49,9 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
         # Randomly decide if the file will be common or unique
         is_common = random.choice([True, False])
 
+        # Randomly select a subdirectory or root directory
+        subdir = random.choice(subdirs)
+
         if size_category == "small":
             content_a = generate_file_content(small_size, 'C')  # Small file
             content_b = content_a
@@ -61,10 +74,11 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
         else:
             content_a = content_b.replace('C', 'A') # Make file unique by changing content from C to A
             content_b = content_b.replace('C', 'B') # Make file unique by changing content from B to A
-            write_file(dir_a, filename, content_a)
-            write_file(dir_b, filename, content_b)
-            a_only_files.append(filename)
-            b_only_files.append(filename)
+            write_file(os.path.join(dir_a, subdir), filename, content_a)
+            write_file(os.path.join(dir_b, subdir), filename, content_b)
+            a_only_files.append(os.path.join(dir_a, subdir, filename))
+            b_only_files.append(os.path.join(dir_b, subdir, filename))
+
     
     # Write the expected results to common.txt, a_only.txt, b_only.txt
     with open(common_file, 'w') as cf:
@@ -76,6 +90,9 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
     with open(b_only_file, 'w') as bf:
         bf.write("\n".join([os.path.join(dir_b, f) for f in b_only_files]) + "\n")
 
+    del content_a
+    del content_b
+
     print(f"Generated {n} files in each directory.")
     print(f"Common files: {len(common_files)}")
     print(f"Unique to dir_a: {len(a_only_files)}")
@@ -83,5 +100,5 @@ def generate_files(n, small_size=1, medium_size=5, large_size=100):
     print("Expected result files created (common.txt, a_only.txt, b_only.txt).")
 
 if __name__ == "__main__":
-    n = 10000  # Number of files, adjust for testing
+    n = 100000  # Number of files, adjust for testing
     generate_files(n)
