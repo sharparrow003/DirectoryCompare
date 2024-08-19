@@ -9,7 +9,7 @@
 **GTest**: Required for running unit tests
 
 
-Originally developed on Linux Ubuntu 16.04
+Originally developed on Linux Ubuntu 18.04
 
 ## Installation
 ### Build from Source 
