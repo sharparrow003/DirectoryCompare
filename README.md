@@ -24,7 +24,7 @@ Originally developed on Linux Ubuntu 16.04
    ```
    
      Build files generated and added to directory build.
-### Usage
+## Usage
 **Run executable using helper script build.sh**
    
    Call build.sh by passing the two directories to be compared as arguments.
@@ -32,7 +32,7 @@ Originally developed on Linux Ubuntu 16.04
    ./build.sh run test_data/files_a/ test_data/files_b/
    ```
 
-### Testing
+## Testing
 **Generate test data using helper script build.sh**
 
    By default this command will create 100,000 files in the directories test_data/files_a and test_data/files_b.
@@ -50,7 +50,7 @@ Originally developed on Linux Ubuntu 16.04
    ./build.sh run test_data/files_a/ test_data/files_b/
    ```
 
-### Cleaning Project
+## Cleaning Project
   This command will delete the build directory
   
    ```
