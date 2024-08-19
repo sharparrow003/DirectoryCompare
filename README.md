@@ -71,6 +71,10 @@ This command will delete both the build and test_data directories
 
 ## Output Files
 These files are generated in the build directory.
+
 **common.txt**: Contains the paths of files that are identical in both directories.
+
 **a_only.txt**: Contains the paths of files that are unique to the first directory
+
 **b_only.txt**: Contains the paths of files that are unique to the second directory
+
