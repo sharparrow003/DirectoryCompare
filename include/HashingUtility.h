@@ -6,6 +6,9 @@
 #include <sstream>
 #include <iomanip>
 #include <stdexcept>
+#include <string>
+
+using namespace std;
 
 namespace HashingUtility {
 

@@ -20,6 +20,11 @@ public:
     // Function to write results to files
     void writeResults();
 
+    vector<string> getCommonFiles() { return commonFiles; }
+    vector<string> getAOnlyFiles() { return aOnlyFiles; }
+    vector<string> getBOnlyFiles() { return bOnlyFiles; }
+
+
     // Destructor
     ~DirectoryComparator();
 

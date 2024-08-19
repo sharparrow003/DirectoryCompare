@@ -19,6 +19,19 @@ case $1 in
 		cd build/
 		./DirComparator $a_dir $b_dir
 	;;
+	build_unit_tests)
+		echo "Building code with unit tests ..."
+		mkdir -p build/
+		cd build
+
+		cmake -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_C_COMPILER=gcc-10 -DUNIT_TESTS=ON .. 
+
+		cmake --build .
+	;;
+	run_unit_tests)
+		cd build
+		ctest -V
+	;;
 	create_test_data)
 		echo "Creating sample test data ..."
 		python3 generate_test_data.py
