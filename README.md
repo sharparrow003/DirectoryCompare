@@ -109,10 +109,11 @@ This command will delete both the `build` and `test_data` directories
 1. `src/main.cpp`: Entry point of the program. Handles command line argument parsing, initializes `DirectoryComparator` and starts directory comparison process.
 2. `src/DirectoryComparator.cpp` and `include/DirectoryComparator.h`: Contains the core logic for comparing directories including file traversal, hasing and result generation.
 3. `include/HashingUtility.h`: Provides utilities for hasing file contents using SHA-256
-4. `tests`: Contains unit tests
+4. `tests`: Directory containing unit tests
 5. `generate_test_data.py`: Python script used to generate test directories and files with varying sizes and contents, including subdirectories. The data generated in test_data directory helps stress test the program and verify its correctness.
-6. `test_data/`: Directory in which sample test data is creaeted and added by the generate_test_data.py script
+6. `test_data`: Directory in which sample test data is creaeted and added by the generate_test_data.py script
 7. `build.sh`: Bash script used to streamline building, running and cleaning project
+8. `build`: Directory that is used to build project
 
 ## Output Files
 1. `build/DirComparator`: Executable that is created after project is compiled.
