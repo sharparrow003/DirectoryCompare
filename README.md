@@ -6,6 +6,8 @@
 
 **OpenSSL**: Required for SHA-256 hashing
 
+**GTest**: Required for running unit tests
+
 
 Originally developed on Linux Ubuntu 16.04
 
@@ -72,6 +74,17 @@ Originally developed on Linux Ubuntu 16.04
    ```
    build.sh run_unit_tests
    ```
+
+**NOTE: If CMake cannot find GTest in your Linux environment, here are some steps you can follow to resolve the issue**
+
+```
+# These steps work on Ubuntu
+sudo apt-get install libgtest-dev
+cd /usr/src/gtest
+sudo cmake CMakeLists.txt
+sudo make
+sudo cp *.a /usr/lib
+```
 
 ## Cleaning
   This command will delete the `build` directory
