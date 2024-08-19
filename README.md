@@ -16,8 +16,8 @@ Originally developed on Linux Ubuntu 16.04
 1. **Clone the repository**
    
    ```
-   git clone git@github.com:sharparrow003/anacondaDirCompare.git
-   cd anacondaDirCompare
+   git clone git@github.com:sharparrow003/DirectoryCompare.git
+   cd DirectoryCompare
    ```
 2. **Build the project using helper script `build.sh`**
    
