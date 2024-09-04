@@ -4,6 +4,16 @@ currentDir=$(pwd)
 a_dir=$currentDir/$2
 b_dir=$currentDir/$3
 
+clean() {
+	echo "Cleaning build dir ..."
+	rm -rf build/
+}
+
+clean_test_data() {
+	echo "Cleaning test data ..."
+	rm -rf test_data/
+}
+
 case $1 in
 	build)
 		echo "Building code ..."
@@ -38,15 +48,13 @@ case $1 in
 	;;
 
 	clean)
-		echo "Cleaning build dir ..."
-		rm -rf build/
+		clean
 	;;
 	clean_test_data)
-		echo "Cleaning test data ..."
-		rm -rf test_data/
+		clean_test_data
 	;;
 	clean_all)
-		create_test_data
+		clean
 		clean_test_data
 	;;
 
